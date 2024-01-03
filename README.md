@@ -24,6 +24,6 @@ cp .env.example.local .env
 
 ```bash
 docker compose up -d
-pnpm drizzle:migrate
+pnpm drizzle:seed
 pnpm dev
 ```
