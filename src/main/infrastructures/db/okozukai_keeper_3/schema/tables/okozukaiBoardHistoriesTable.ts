@@ -24,7 +24,7 @@ export const okozukaiBoardHistoriesTable = pgTable(
     okozukaiBoardScheduleId: uuid('okozukai_board_schedule_id').references(
       () => okozukaiBoardSchedulesTable.id,
       {
-        onUpdate: 'set null',
+        onUpdate: 'cascade',
         onDelete: 'set null',
       },
     ),

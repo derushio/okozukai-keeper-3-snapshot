@@ -1,0 +1,522 @@
+{
+  "id": "ba8583cf-e6b0-407d-8f21-9574a5c5cc7f",
+  "prevId": "c5333ed1-ce9e-4323-aac8-4680aad3a982",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "okozukai_board_histories": {
+      "name": "okozukai_board_histories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "okozukai_board_id": {
+          "name": "okozukai_board_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "okozukai_board_schedule_id": {
+          "name": "okozukai_board_schedule_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "okozukai_board_histories_date_index": {
+          "name": "okozukai_board_histories_date_index",
+          "columns": [
+            "date"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_histories_title_index": {
+          "name": "okozukai_board_histories_title_index",
+          "columns": [
+            "title"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_histories_value_index": {
+          "name": "okozukai_board_histories_value_index",
+          "columns": [
+            "value"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_histories_created_at_index": {
+          "name": "okozukai_board_histories_created_at_index",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_histories_updated_at_index": {
+          "name": "okozukai_board_histories_updated_at_index",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "okozukai_board_histories_okozukai_board_id_okozukai_boards_id_fk": {
+          "name": "okozukai_board_histories_okozukai_board_id_okozukai_boards_id_fk",
+          "tableFrom": "okozukai_board_histories",
+          "tableTo": "okozukai_boards",
+          "columnsFrom": [
+            "okozukai_board_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "okozukai_board_histories_okozukai_board_schedule_id_okozukai_board_schedules_id_fk": {
+          "name": "okozukai_board_histories_okozukai_board_schedule_id_okozukai_board_schedules_id_fk",
+          "tableFrom": "okozukai_board_histories",
+          "tableTo": "okozukai_board_schedules",
+          "columnsFrom": [
+            "okozukai_board_schedule_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "okozukai_board_schedules": {
+      "name": "okozukai_board_schedules",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "okozukai_board_id": {
+          "name": "okozukai_board_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_date": {
+          "name": "first_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "okozukai_board_schedules_title_index": {
+          "name": "okozukai_board_schedules_title_index",
+          "columns": [
+            "title"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_schedules_value_index": {
+          "name": "okozukai_board_schedules_value_index",
+          "columns": [
+            "value"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_schedules_type_index": {
+          "name": "okozukai_board_schedules_type_index",
+          "columns": [
+            "type"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_schedules_first_date_index": {
+          "name": "okozukai_board_schedules_first_date_index",
+          "columns": [
+            "first_date"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_schedules_created_at_index": {
+          "name": "okozukai_board_schedules_created_at_index",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "okozukai_board_schedules_updated_at_index": {
+          "name": "okozukai_board_schedules_updated_at_index",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "okozukai_board_schedules_okozukai_board_id_okozukai_boards_id_fk": {
+          "name": "okozukai_board_schedules_okozukai_board_id_okozukai_boards_id_fk",
+          "tableFrom": "okozukai_board_schedules",
+          "tableTo": "okozukai_boards",
+          "columnsFrom": [
+            "okozukai_board_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "okozukai_boards": {
+      "name": "okozukai_boards",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "okozukai_boards_name_index": {
+          "name": "okozukai_boards_name_index",
+          "columns": [
+            "name"
+          ],
+          "isUnique": false
+        },
+        "okozukai_boards_created_at_index": {
+          "name": "okozukai_boards_created_at_index",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "okozukai_boards_updated_at_index": {
+          "name": "okozukai_boards_updated_at_index",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "okozukai_boards_name_unique": {
+          "name": "okozukai_boards_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    },
+    "user_sessions": {
+      "name": "user_sessions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access_token_hash": {
+          "name": "access_token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access_token_expire_at": {
+          "name": "access_token_expire_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reset_token_hash": {
+          "name": "reset_token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reset_token_expire_at": {
+          "name": "reset_token_expire_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "user_sessions_access_token_hash_index": {
+          "name": "user_sessions_access_token_hash_index",
+          "columns": [
+            "access_token_hash"
+          ],
+          "isUnique": false
+        },
+        "user_sessions_access_token_expire_at_index": {
+          "name": "user_sessions_access_token_expire_at_index",
+          "columns": [
+            "access_token_expire_at"
+          ],
+          "isUnique": false
+        },
+        "user_sessions_reset_token_hash_index": {
+          "name": "user_sessions_reset_token_hash_index",
+          "columns": [
+            "reset_token_hash"
+          ],
+          "isUnique": false
+        },
+        "user_sessions_reset_token_expire_at_index": {
+          "name": "user_sessions_reset_token_expire_at_index",
+          "columns": [
+            "reset_token_expire_at"
+          ],
+          "isUnique": false
+        },
+        "user_sessions_created_at_index": {
+          "name": "user_sessions_created_at_index",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "user_sessions_updated_at_index": {
+          "name": "user_sessions_updated_at_index",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "user_sessions_user_id_users_id_fk": {
+          "name": "user_sessions_user_id_users_id_fk",
+          "tableFrom": "user_sessions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "users_name_index": {
+          "name": "users_name_index",
+          "columns": [
+            "name"
+          ],
+          "isUnique": false
+        },
+        "users_password_hash_index": {
+          "name": "users_password_hash_index",
+          "columns": [
+            "password_hash"
+          ],
+          "isUnique": false
+        },
+        "users_created_at_index": {
+          "name": "users_created_at_index",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "users_updated_at_index": {
+          "name": "users_updated_at_index",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_name_unique": {
+          "name": "users_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
