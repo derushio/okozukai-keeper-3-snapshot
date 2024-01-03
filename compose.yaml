@@ -1,0 +1,12 @@
+services:
+  pg:
+    image: postgres:16
+    env_file: .env
+    environment:
+      POSTGRES_USER: $VITE_DATABASE_USER
+      POSTGRES_PASSWORD: $VITE_DATABASE_PASSWORD
+      POSTGRES_DB: $VITE_DATABASE_NAME
+    ports:
+      - "${VITE_DATABASE_PORT}:5432"
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data

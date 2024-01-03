@@ -1,0 +1,28 @@
+FROM docker:20.10 AS builder
+ARG DATABASE_URL
+
+COPY ./ /mnt/project
+WORKDIR /mnt/project
+
+RUN echo "DATABASE_URL=\"$DATABASE_URL\"" > .env && \
+  apk add --no-cache git bash && \
+  chmod +x ./jenkins/deploy-image.sh
+
+ENTRYPOINT ["/bin/bash", "-c", "./jenkins/deploy-image.sh"]
+
+FROM bitnami/kubectl:latest AS kube
+ARG KUBE_CONFIG
+
+COPY ./ /mnt/project
+WORKDIR /mnt/project
+
+USER root
+
+RUN echo "$KUBE_CONFIG" > /.kube/config && \
+  apt-get update && \
+  apt-get install -y git bash && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  chmod +x ./jenkins/update-deployment.sh
+
+ENTRYPOINT ["/bin/bash", "-c", "./jenkins/update-deployment.sh"]

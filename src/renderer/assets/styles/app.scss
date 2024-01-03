@@ -1,0 +1,83 @@
+@import '$/assets/styles/font.scss';
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+.display-none {
+  display: none;
+}
+
+.border-radius {
+  border-radius: 8px;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 0.01em #000000;
+}
+
+.text-stroke-w {
+  -webkit-text-stroke: 0.01em #ffffff;
+}
+
+.blur-100 {
+  backdrop-filter: blur(100px);
+}
+.blur-50 {
+  backdrop-filter: blur(50px);
+}
+.blur-20 {
+  backdrop-filter: blur(20px);
+}
+.blur-15 {
+  backdrop-filter: blur(15px);
+}
+.blur-10 {
+  backdrop-filter: blur(10px);
+}
+.blur-5 {
+  backdrop-filter: blur(5px);
+}
+.blur-3 {
+  backdrop-filter: blur(3px);
+}
+.blur-1 {
+  backdrop-filter: blur(1px);
+}
+
+.active-effect {
+  transition: transform 0.2s;
+
+  &:active {
+    box-shadow: none;
+    transform: scale(0.95) translate(0.25%, 0.25%);
+  }
+}

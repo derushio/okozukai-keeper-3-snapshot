@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: okozukai-keeper-3-backend-service
+  namespace: home
+spec:
+  type: ClusterIP
+  selector:
+    app: okozukai-keeper-3-backend
+  ports:
+    - protocol: TCP
+      port: 8020

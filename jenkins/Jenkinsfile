@@ -1,0 +1,35 @@
+/* groovylint-disable DuplicateStringLiteral, LineLength */
+/* groovylint-disable-next-line CompileStatic */
+pipeline {
+  agent any
+  tools {
+    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'default'
+  }
+
+  environment {
+    KUBE_CONFIG = "${params.KUBE_CONFIG}"
+    DATABASE_URL = "${params.DATABASE_URL}"
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        // 以前まで使っていたコンテナがあれば削除
+        sh 'docker rm -f builder kube'
+        sh 'docker rmi -f builder kube'
+
+        // docker imageをdeploy
+        sh 'docker build --network host -t builder --target builder -f ./jenkins/Dockerfile.jenkins --build-arg DATABASE_URL="$DATABASE_URL" .'
+        sh 'docker run --network host --name builder -v "/var/run/docker.sock:/var/run/docker.sock" -v "/var/lib/docker:/var/lib/docker" builder'
+
+        // k8s imageのupdate
+        sh 'docker build --network host -t kube --target kube -f ./jenkins/Dockerfile.jenkins --build-arg KUBE_CONFIG="$KUBE_CONFIG" .'
+        sh 'docker run --network host --name kube kube'
+
+        // 使ったコンテナの削除
+        sh 'docker rm -f builder kube'
+        sh 'docker rmi -f builder kube'
+      }
+    }
+  }
+}

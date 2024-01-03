@@ -1,0 +1,9 @@
+node_modules
+dist
+out
+pnpm-lock.yaml
+*.md
+
+electron-builder.yml
+src/main/infrastructures/db/okozukai_keeper_3/migrations
+src/main/infrastructures/db/okozukai_keeper_2/migrations/schema.ts

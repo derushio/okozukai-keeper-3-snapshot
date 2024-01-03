@@ -1,0 +1,16 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "composite": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "$/*": ["./src/renderer/*"],
+      "#/*": ["./src/main/*"],
+      "^/*": ["./src/common/*"],
+      "&/*": ["./*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "out"]
+}

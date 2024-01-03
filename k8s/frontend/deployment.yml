@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: okozukai-keeper-3-frontend
+  namespace: home
+  labels:
+    app: okozukai-keeper-3-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: okozukai-keeper-3-frontend
+  template:
+    metadata:
+      labels:
+        app: okozukai-keeper-3-frontend
+    spec:
+      containers:
+        - name: okozukai-keeper-3-frontend
+          image: localhost:32000/okozukai-keeper-3-frontend:acdc526
+          ports:
+            - containerPort: 5173
+
+          livenessProbe:
+            httpGet:
+              path: /#/
+              port: 5173
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /#/
+              port: 5173
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

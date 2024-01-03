@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: okozukai-keeper-3-batch
+  namespace: home
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: okozukai-keeper-3-batch
+              image: localhost:32000/okozukai-keeper-3-backend:51bc99b
+              imagePullPolicy: IfNotPresent
+              command:
+                - pnpm
+                - batch:executeOkozukaiBoardSchedules
+          restartPolicy: OnFailure

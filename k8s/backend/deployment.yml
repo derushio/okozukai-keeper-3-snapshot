@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: okozukai-keeper-3-backend
+  namespace: home
+  labels:
+    app: okozukai-keeper-3-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: okozukai-keeper-3-backend
+  template:
+    metadata:
+      labels:
+        app: okozukai-keeper-3-backend
+    spec:
+      containers:
+        - name: okozukai-keeper-3-backend
+          image: localhost:32000/okozukai-keeper-3-backend:acdc526
+          ports:
+            - containerPort: 8020
+
+          livenessProbe:
+            httpGet:
+              path: /trpc/healthcheck
+              port: 8020
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /trpc/healthcheck
+              port: 8020
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

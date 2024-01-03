@@ -1,0 +1,5 @@
+node_modules
+dist
+out
+.gitignore
+src/main/infrastructures/db/okozukai_keeper_2/migrations/schema.ts

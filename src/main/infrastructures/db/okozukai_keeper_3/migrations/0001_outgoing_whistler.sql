@@ -1,0 +1,1 @@
+ALTER TABLE "okozukai_board_histories" ALTER COLUMN "date" SET DATA TYPE date;

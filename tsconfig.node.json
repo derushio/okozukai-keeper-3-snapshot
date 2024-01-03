@@ -1,0 +1,16 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "composite": true,
+    "esModuleInterop": true,
+    "types": ["electron-vite/node"],
+    "paths": {
+      "$/*": ["./src/renderer/*"],
+      "#/*": ["./src/main/*"],
+      "^/*": ["./src/common/*"],
+      "&/*": ["./*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "out"]
+}
